@@ -5,7 +5,11 @@ import re
 import hashlib
 import concurrent.futures
 from bs4 import BeautifulSoup
-import gender_guesser.detector as gender
+try:
+    import gender_guesser.detector as gender
+except ImportError:
+    gender = None
+
 
 # --- CONFIGURATION ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -258,4 +262,5 @@ def check_username(username):
 if __name__ == "__main__":
     target = input("Username: ")
     data = check_username(target)
+
     print(json.dumps(data, indent=2, default=str))
