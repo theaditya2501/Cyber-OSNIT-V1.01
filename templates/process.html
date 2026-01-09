@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OSINT Investigation in Progress</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+/* ... (Keep your existing CSS for loader/spinner/progress) ... */
+.container{max-width:700px;margin:120px auto;text-align:center;}
+.loader{width:90px;height:90px;border:6px solid #1e293b;border-top:6px solid #f59e0b;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 30px;}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+h2{margin-bottom:6px}.sub{font-size:13px;color:#94a3b8;margin-bottom:40px}
+.status{font-family:monospace;font-size:14px;color:#e5e7eb;min-height:24px;}
+.progress{margin-top:40px;height:8px;background:#1e293b;border-radius:8px;overflow:hidden;}
+.progress-bar{height:100%;width:0%;background:#f59e0b;transition:width .4s ease;}
+</style>
+</head>
+
+<body class="dark">
+<div class="container">
+    <div class="loader"></div>
+    <h2>OSINT Investigation Running</h2>
+    <div class="sub">Collecting publicly available intelligence via Background Worker</div>
+
+    <div class="status" id="statusText">Initializing investigation environment...</div>
+
+    <div class="progress">
+        <div class="progress-bar" id="bar"></div>
+    </div>
+</div>
+
+<script>
+// 1. Get Case ID
+const urlParams = new URLSearchParams(window.location.search);
+const caseId = urlParams.get('id');
+
+const text = document.getElementById("statusText");
+const bar = document.getElementById("bar");
+let progress = 0;
+
+// 2. Visual Animation Loop (UX only)
+const steps = [
+    "Validating input identifiers...", "Checking social profiles...",
+    "Correlating identity signals...", "Assessing risk exposure...",
+    "Finalizing report..."
+];
+let stepIndex = 0;
+
+function updateVisuals() {
+    if (stepIndex < steps.length) {
+        text.innerText = steps[stepIndex];
+        stepIndex++;
+    }
+    if (progress < 90) {
+        progress += 5;
+        bar.style.width = progress + "%";
+    }
+}
+setInterval(updateVisuals, 1500);
+
+// 3. Real Backend Polling
+function pollStatus() {
+    if (!caseId) {
+        text.innerText = "Error: No Case ID provided.";
+        return;
+    }
+
+    fetch(`/check_status/${caseId}`)
+    .then(r => r.json())
+    .then(data => {
+        if (data.status === "COMPLETED") {
+            bar.style.width = "100%";
+            text.innerText = "Scan Complete! Redirecting...";
+            setTimeout(() => {
+                window.location.href = "/dashboard?id=" + caseId;
+            }, 1000);
+        } else {
+            // Keep polling
+            setTimeout(pollStatus, 2000);
+        }
+    })
+    .catch(e => setTimeout(pollStatus, 3000));
+}
+
+// Start polling
+pollStatus();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OSINT Investigation Results</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+/* ... Include all your original CSS here ... */
+.container { max-width: 1400px; margin: 30px auto; padding: 0 30px; }
+.section { margin-top: 36px; }
+.card { background: #0f172a; padding: 18px; border-radius: 14px; border: 1px solid #1e293b; }
+.divider { border-top: 1px solid #1e293b; margin: 30px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; color: #fff;}
+th, td { padding: 10px; border-bottom: 1px solid #1e293b; }
+.badge { padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; }
+.high { background: #7f1d1d; color: #fecaca; }
+.medium { background: #78350f; color: #fde68a; }
+.low { background: #064e3b; color: #6ee7b7; }
+.grid-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+canvas { max-height: 170px !important; }
+</style>
+</head>
+
+<body class="dark">
+<div class="container">
+    <h2>OSINT Investigation Results</h2>
+
+    <div class="summary-grid" style="display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-bottom:30px;">
+        <div class="card"><span style="color:#94a3b8; font-size:12px;">Risk Score</span><br><b id="risk" style="font-size:24px;"></b></div>
+        <div class="card"><span style="color:#94a3b8; font-size:12px;">Identity Confidence</span><br><b id="confidence" style="font-size:24px;"></b></div>
+        <div class="card"><span style="color:#94a3b8; font-size:12px;">Platforms Found</span><br><b id="platformCount" style="font-size:24px;"></b></div>
+        <div class="card"><span style="color:#94a3b8; font-size:12px;">Exposure Level</span><br><b id="exposure" style="font-size:24px;"></b></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+        <h3>Evidence Log</h3>
+        <div class="card">
+            <table>
+                <thead><tr><th>Platform</th><th>URL</th><th>Type</th><th>Confidence</th></tr></thead>
+                <tbody id="evidenceTable"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="section grid-3">
+        <div><h3>Risk Contributors</h3><div class="card"><canvas id="riskChart"></canvas></div></div>
+        <div><h3>Exposure Distribution</h3><div class="card"><canvas id="exposureChart"></canvas></div></div>
+        <div><h3>Confidence Breakdown</h3><div class="card"><canvas id="confidenceChart"></canvas></div></div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+        <h3>Negative Intelligence (What was NOT found)</h3>
+        <div class="sub">Based on public surface web analysis only</div>
+        <div class="card">
+            <ul>
+                <li>No direct email exposure on scraped GitHub profiles.</li>
+                <li>No valid phone carrier detected (if phone provided).</li>
+                <li><em style="color:#f59e0b">Note: Dark Web / Breach Data was NOT scanned in this version.</em></li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const urlParams = new URLSearchParams(window.location.search);
+const caseId = urlParams.get('id');
+
+if (!caseId) {
+    alert("No Case ID provided.");
+} else {
+    fetch(`/get_result/${caseId}`)
+    .then(r => r.json())
+    .then(data => {
+        if(!data.case_id) return;
+
+        // 1. Populate Summary
+        document.getElementById("risk").innerText = data.risk.risk_score + " (" + data.risk.level + ")";
+        document.getElementById("confidence").innerText = data.identity_confidence.confidence_score + "% (" + data.identity_confidence.level + ")";
+        
+        const found = Object.values(data.username_results).filter(p => p.found);
+        document.getElementById("platformCount").innerText = found.length;
+        document.getElementById("exposure").innerText = (data.email_results.valid || data.phone_results.valid) ? "MEDIUM" : "LOW";
+
+        // 2. Populate Evidence
+        fetch(`/get_evidence/${caseId}`)
+        .then(r => r.json())
+        .then(evidence => {
+            let rows = "";
+            evidence.forEach(ev => {
+                rows += `<tr>
+                    <td>${ev.platform}</td>
+                    <td><a href="${ev.url}" target="_blank" style="color:#60a5fa">${ev.url}</a></td>
+                    <td>${ev.type}</td>
+                    <td><span class="badge ${ev.confidence.toLowerCase()}">${ev.confidence}</span></td>
+                </tr>`;
+            });
+            document.getElementById("evidenceTable").innerHTML = rows || "<tr><td colspan='4'>No evidence found</td></tr>";
+        });
+
+        // 3. Render Charts
+        new Chart(document.getElementById("riskChart"),{type:"bar",data:{labels:["Username","Email","Phone"],datasets:[{label:"Risk", data:[found.length*15,20,10], backgroundColor:"#f59e0b"}]}});
+        new Chart(document.getElementById("exposureChart"),{type:"doughnut",data:{labels:["Found","Safe"],datasets:[{data:[found.length, 20-found.length], backgroundColor:["#ef4444","#10b981"]}]}});
+        new Chart(document.getElementById("confidenceChart"),{type:"bar",data:{labels:["Correlation","Profile"],datasets:[{label:"Confidence",data:[30,20], backgroundColor:"#3b82f6"}]},options:{indexAxis:"y"}});
+    });
+}
+</script>
+</body>
+</html>

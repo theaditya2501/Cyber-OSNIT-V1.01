@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OSINT Platform</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .hero { max-width: 1100px; margin: 120px auto; padding: 0 40px; }
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+        .hero h1 { font-size: 44px; line-height: 1.2; margin-bottom: 18px; }
+        .hero p { font-size: 16px; color: #94a3b8; max-width: 520px; margin-bottom: 28px; }
+        .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 40px; }
+        .feature { background: #0f172a; padding: 18px; border-radius: 10px; font-size: 14px; }
+        .right-panel { background: linear-gradient(180deg, #020617, #020617); border: 1px solid #1e293b; border-radius: 14px; padding: 24px; }
+        .stat { margin-bottom: 18px; }
+        .stat span { display: block; font-size: 12px; color: #94a3b8; }
+        .stat b { font-size: 22px; }
+    </style>
+</head>
+
+<body class="dark">
+<header class="navbar">
+    <div class="brand">🕵️ <span>OSINT PLATFORM</span></div>
+    <div class="nav-links">
+        <a href="/try">Try</a>
+        <a href="#">About</a>
+    </div>
+</header>
+
+<main class="hero">
+    <div class="hero-grid">
+        <!-- LEFT -->
+        <div>
+            <h1>Open-Source Intelligence,<br> Done <span style="color:#f59e0b">Professionally</span></h1>
+            <p>Analyze public digital exposure, identity reuse, and online footprint using ethical, analyst-grade OSINT techniques.</p>
+            <a href="/try" class="btn primary">Start Investigation</a>
+            <div class="features">
+                <div class="feature">✔ Public data only</div>
+                <div class="feature">✔ No login required</div>
+                <div class="feature">✔ Analyst-style reports</div>
+                <div class="feature">✔ Ethical OSINT</div>
+            </div>
+        </div>
+        <!-- RIGHT -->
+        <div class="right-panel">
+            <div class="stat"><span>Supported Platforms</span><b>200+</b></div>
+            <div class="stat"><span>Analysis Type</span><b>Username • Email • Phone</b></div>
+            <div class="stat"><span>Risk Modeling</span><b>Exposure • Correlation • Confidence</b></div>
+            <div class="stat"><span>Compliance</span><b>Public OSINT Only</b></div>
+        </div>
+    </div>
+</main>
+<footer class="footer">
+    <div class="footer-text">This platform analyzes only publicly available information. No private, paid, or restricted sources are accessed.</div>
+</footer>
+</body>
+</html>

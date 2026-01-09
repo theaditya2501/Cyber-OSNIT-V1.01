@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Start Investigation</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="dark">
+<header class="navbar">
+    <div class="brand">🕵️ <span>OSINT PLATFORM</span></div>
+</header>
+
+<main class="form-container">
+    <h1>Start OSINT Investigation</h1>
+    <p class="form-subtitle">Enter known public identifiers to analyze digital exposure.</p>
+
+    <div class="form-card">
+        <input type="text" id="username" placeholder="Username (optional)">
+        <input type="email" id="email" placeholder="Email address (optional)">
+        <input type="text" id="phone" placeholder="Phone number (optional)">
+
+        <button onclick="startProcess()" class="btn primary full">Start Investigation</button>
+
+        <p class="form-note">Only publicly available information is analyzed.</p>
+    </div>
+</main>
+
+<script>
+function startProcess() {
+    const data = {
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value
+    };
+
+    fetch("/run_osint", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(r => r.json())
+    .then(response => {
+        if(response.case_id) {
+            // Redirect with the specific Case ID
+            window.location.href = "/process?id=" + response.case_id;
+        }
+    });
+}
+</script>
+
+</body>
+</html>
