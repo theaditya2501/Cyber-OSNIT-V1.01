@@ -1,5 +1,5 @@
 flask
+gunicorn
 requests
 beautifulsoup4
-phonenumbers
-gunicorn
+gender-guesser
