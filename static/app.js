@@ -18,7 +18,7 @@ function startInvestigation() {
         let platformFound = Object.values(data.username_results).filter(p => p.found).length;
 
         document.getElementById("riskBox").innerText =
-            data.risk.risk_score + " (" + data.risk.level + ")";
+            data.risk.score + " (" + data.risk.level + ")";
 
         document.getElementById("confidenceBox").innerText =
             data.identity_confidence.confidence_score + "% (" + data.identity_confidence.level + ")";
@@ -48,8 +48,8 @@ function startInvestigation() {
                     <b>${p}</b><br>
                     URL: <a href="${d.url}" target="_blank">${d.url}</a><br>
                     Category: ${d.category}<br>
-                    Exposure: ${d.exposure}<br>
-                    Intelligence: ${d.breach_indicator}
+                    Exposure: ${d.exposure || "Public"}<br>
+                    Intelligence: ${d.breach_indicator || "None"}
                 </li><hr>`;
             } else {
                 pHTML += `<li>${p}: Not Found</li>`;
@@ -63,7 +63,7 @@ function startInvestigation() {
             <h5>Email Intelligence</h5>
             <ul>
                 <li>Provider: ${data.email_results.provider || "N/A"}</li>
-                <li>Variants: ${data.email_results.email_variations.join(", ")}</li>
+                <li>Variants: ${(data.email_results.email_variations || []).join(", ")}</li>
                 <li>Public exposure: ${data.profiles.GitHub?.email ? "Yes (GitHub)" : "No"}</li>
             </ul>
 
@@ -80,7 +80,7 @@ function startInvestigation() {
             <h5>Identity Consistency</h5>
             <ul>
                 <li>Username reuse detected across multiple platforms</li>
-                <li>Email consistency: ${data.email_results.email_variations.length > 1 ? "Medium" : "Low"}</li>
+                <li>Email consistency: ${(data.email_results.email_variations || []).length > 1 ? "Medium" : "Low"}</li>
                 <li>Overall confidence: ${data.identity_confidence.confidence_score}%</li>
             </ul>
         `;
@@ -95,5 +95,10 @@ function startInvestigation() {
                 No private, restricted, or paid data sources were accessed.
             </p>
         `;
+
+        /* ===== ✅ FIX: UPDATE RADAR GRAPH (THIS WAS MISSING) ===== */
+        if (data.radar_stats) {
+            updateRadarGraph(data.radar_stats);
+        }
     });
 }
