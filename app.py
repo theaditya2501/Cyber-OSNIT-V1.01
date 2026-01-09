@@ -261,7 +261,11 @@ def run_osint():
 
     update_case(current_case_id, latest_result, "investigation.json")
     print(f"[>] Scan complete. Sent data to frontend.\n")
-    return jsonify(latest_result)
+    return jsonify({
+        "success": True,
+        "data": latest_result
+    })
+
 
 @app.route("/add_evidence", methods=["POST"])
 def manual_evidence():
@@ -295,4 +299,5 @@ def submit_analyst_notes():
 
 if __name__ == "__main__":
     print("[+] OSINT Command Center Online: http://127.0.0.1:5000")
+
     app.run(debug=True, port=5000)
