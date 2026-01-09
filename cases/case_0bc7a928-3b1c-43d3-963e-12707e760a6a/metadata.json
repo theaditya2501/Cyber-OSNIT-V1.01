@@ -1,0 +1,14 @@
+{
+  "case_id": "0bc7a928-3b1c-43d3-963e-12707e760a6a",
+  "case_name": "Auto-created OSINT Case",
+  "analyst": "System",
+  "scope": {
+    "username": true,
+    "email": true,
+    "phone": true,
+    "consent": true
+  },
+  "status": "OPEN",
+  "created_at": "2026-01-04T13:52:50.083620+00:00",
+  "updated_at": "2026-01-04T13:52:50.083620+00:00"
+}

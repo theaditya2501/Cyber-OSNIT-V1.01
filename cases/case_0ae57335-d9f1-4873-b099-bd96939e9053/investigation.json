@@ -1,0 +1,192 @@
+{
+  "case_id": "0ae57335-d9f1-4873-b099-bd96939e9053",
+  "timestamp": "2026-01-04T06:20:21.027172+00:00",
+  "username_results": {
+    "Facebook": {
+      "found": true,
+      "url": "https://www.facebook.com/theaditya2501",
+      "category": "Social",
+      "exposure": "Public username reuse",
+      "breach_indicator": "This platform has appeared in historical public breach datasets"
+    },
+    "Instagram": {
+      "found": true,
+      "url": "https://www.instagram.com/theaditya2501/",
+      "category": "Social",
+      "exposure": "Public username reuse",
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Twitter": {
+      "found": true,
+      "url": "https://twitter.com/theaditya2501",
+      "category": "Social",
+      "exposure": "Public username reuse",
+      "breach_indicator": "No known public breach intelligence associated",
+      "avatar": "https://unavatar.io/twitter/theaditya2501"
+    },
+    "LinkedIn": {
+      "found": false,
+      "url": null,
+      "category": "Professional",
+      "exposure": null,
+      "breach_indicator": "This platform has appeared in historical public breach datasets"
+    },
+    "Reddit": {
+      "found": true,
+      "url": "https://www.reddit.com/user/theaditya2501",
+      "category": "Forum",
+      "exposure": "Public username reuse",
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "GitHub": {
+      "found": true,
+      "url": "https://github.com/theaditya2501",
+      "category": "Developer",
+      "exposure": "Public username reuse",
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "GitLab": {
+      "found": false,
+      "url": null,
+      "category": "Developer",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Bitbucket": {
+      "found": false,
+      "url": null,
+      "category": "Developer",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Medium": {
+      "found": false,
+      "url": null,
+      "category": "Content",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Dev.to": {
+      "found": false,
+      "url": null,
+      "category": "Developer Blog",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "StackOverflow": {
+      "found": false,
+      "url": null,
+      "category": "Developer Forum",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Pastebin": {
+      "found": false,
+      "url": null,
+      "category": "Code Sharing",
+      "exposure": null,
+      "breach_indicator": "This platform has appeared in historical public breach datasets"
+    },
+    "Quora": {
+      "found": false,
+      "url": null,
+      "category": "Forum",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Fiverr": {
+      "found": false,
+      "url": null,
+      "category": "Freelance",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Upwork": {
+      "found": false,
+      "url": null,
+      "category": "Freelance",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Steam": {
+      "found": true,
+      "url": "https://steamcommunity.com/id/theaditya2501",
+      "category": "Gaming",
+      "exposure": "Public username reuse",
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Twitch": {
+      "found": true,
+      "url": "https://www.twitch.tv/theaditya2501",
+      "category": "Streaming",
+      "exposure": "Public username reuse",
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "SoundCloud": {
+      "found": false,
+      "url": null,
+      "category": "Audio",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "YouTube": {
+      "found": false,
+      "url": null,
+      "category": "Content",
+      "exposure": null,
+      "breach_indicator": "No known public breach intelligence associated"
+    },
+    "Pinterest": {
+      "found": true,
+      "url": "https://www.pinterest.com/theaditya2501",
+      "category": "Social",
+      "exposure": "Public username reuse",
+      "breach_indicator": "No known public breach intelligence associated"
+    }
+  },
+  "email_results": {
+    "valid": true,
+    "provider": "gmail.com",
+    "email_variations": [
+      "adityasopra0@gmail.com",
+      "adityasopra@gmail.com"
+    ],
+    "gravatar": {
+      "exists": false,
+      "profile_url": null
+    },
+    "breach_indicator": "Check via trusted breach intelligence (HIBP)"
+  },
+  "phone_results": {
+    "valid": false,
+    "country": null,
+    "carrier": null
+  },
+  "profiles": {
+    "GitHub": {
+      "platform": "GitHub",
+      "profile_url": "https://github.com/theaditya2501",
+      "name": "Aditya",
+      "bio": "",
+      "location": null,
+      "company": null,
+      "email": null,
+      "website": null,
+      "public_repos": "3",
+      "avatar": "https://avatars.githubusercontent.com/u/137709597?s=64&v=4"
+    }
+  },
+  "risk": {
+    "risk_score": 120,
+    "level": "HIGH"
+  },
+  "identity_confidence": {
+    "confidence_score": 55,
+    "level": "MEDIUM",
+    "reasons": [
+      "Username reused across multiple platforms",
+      "Valid email provided",
+      "Email variations correlate with username"
+    ]
+  }
+}

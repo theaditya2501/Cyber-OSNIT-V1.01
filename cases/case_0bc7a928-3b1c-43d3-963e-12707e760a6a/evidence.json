@@ -1,0 +1,186 @@
+[
+  {
+    "evidence_id": "3f712d96-09f5-40a3-a514-ca5e17ae9b65",
+    "platform": "Facebook",
+    "url": "https://www.facebook.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.381533+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "3b1fefc8-ea94-4108-8a05-fff2920be730",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/theaditya2501/",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.383532+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "d2769714-db43-4c97-b2f9-1816ee1c6c0f",
+    "platform": "Twitter",
+    "url": "https://twitter.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.388598+00:00",
+    "images": [
+      "https://unavatar.io/twitter/theaditya2501"
+    ]
+  },
+  {
+    "evidence_id": "f6c64028-271f-43e1-bb90-385b0d5854bf",
+    "platform": "Reddit",
+    "url": "https://www.reddit.com/user/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.390595+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "398971a8-853a-4e84-9dd1-908a0133730d",
+    "platform": "GitHub",
+    "url": "https://github.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.393588+00:00",
+    "images": [
+      "https://avatars.githubusercontent.com/u/137709597?s=64&v=4"
+    ]
+  },
+  {
+    "evidence_id": "7ff8765c-cdf9-4da3-a774-d2c197ed2ff3",
+    "platform": "Steam",
+    "url": "https://steamcommunity.com/id/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.396595+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "70887816-774f-4572-b741-1898fd40c421",
+    "platform": "Twitch",
+    "url": "https://www.twitch.tv/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.403142+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "3af27569-97d6-4845-a488-9e3f507f9e2d",
+    "platform": "Pinterest",
+    "url": "https://www.pinterest.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:53:28.405142+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "e8bfa0ee-0d9e-4564-8f08-5161885618db",
+    "platform": "Facebook",
+    "url": "https://www.facebook.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.278748+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "59326753-7baa-4ad7-bf01-045275e6d263",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/theaditya2501/",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.284748+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "3d4de325-ea89-4ba5-bb7d-2690a4e2d50f",
+    "platform": "Twitter",
+    "url": "https://twitter.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.294266+00:00",
+    "images": [
+      "https://unavatar.io/twitter/theaditya2501"
+    ]
+  },
+  {
+    "evidence_id": "3f38c806-1fd4-43a1-abd7-9f1f66c3cbc2",
+    "platform": "Reddit",
+    "url": "https://www.reddit.com/user/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.297782+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "2dc0ab8a-74d6-4734-83aa-63a1ce6aeb11",
+    "platform": "GitHub",
+    "url": "https://github.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.304791+00:00",
+    "images": [
+      "https://avatars.githubusercontent.com/u/137709597?s=64&v=4"
+    ]
+  },
+  {
+    "evidence_id": "66a55ccc-a748-42ad-9e81-7bb8c02553de",
+    "platform": "Steam",
+    "url": "https://steamcommunity.com/id/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.308310+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "b167af7f-468d-4d3b-a281-85cf3f0be1a8",
+    "platform": "Twitch",
+    "url": "https://www.twitch.tv/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.311318+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "7bed52b1-ae4f-469e-83b2-57b54f916538",
+    "platform": "Pinterest",
+    "url": "https://www.pinterest.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T13:56:50.314319+00:00",
+    "images": []
+  }
+]

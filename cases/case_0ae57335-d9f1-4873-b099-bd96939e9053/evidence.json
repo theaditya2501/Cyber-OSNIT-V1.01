@@ -1,0 +1,94 @@
+[
+  {
+    "evidence_id": "0bdf7f79-2e26-45dd-9e18-77cd84ea04cd",
+    "platform": "Facebook",
+    "url": "https://www.facebook.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:20.999531+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "b1fed8a6-a33e-4ee9-b601-df509e4ae332",
+    "platform": "Instagram",
+    "url": "https://www.instagram.com/theaditya2501/",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:21.001079+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "a2eb0b95-6622-4d3c-a9a3-c2293e5855ff",
+    "platform": "Twitter",
+    "url": "https://twitter.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:21.007737+00:00",
+    "images": [
+      "https://unavatar.io/twitter/theaditya2501"
+    ]
+  },
+  {
+    "evidence_id": "781f297d-4480-4f72-b934-849643d02f42",
+    "platform": "Reddit",
+    "url": "https://www.reddit.com/user/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:21.007737+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "cd5039cc-95b3-400c-ab47-cc06ae11853f",
+    "platform": "GitHub",
+    "url": "https://github.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:21.014040+00:00",
+    "images": [
+      "https://avatars.githubusercontent.com/u/137709597?s=64&v=4"
+    ]
+  },
+  {
+    "evidence_id": "2a0895ca-d77c-4c72-ba23-43064ecd25ef",
+    "platform": "Steam",
+    "url": "https://steamcommunity.com/id/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:21.016890+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "d9c77278-1ffd-499f-9483-3d0e3c77c60d",
+    "platform": "Twitch",
+    "url": "https://www.twitch.tv/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:21.021231+00:00",
+    "images": []
+  },
+  {
+    "evidence_id": "70f55d6d-2eb6-4e22-ba2f-70fe696e4da0",
+    "platform": "Pinterest",
+    "url": "https://www.pinterest.com/theaditya2501",
+    "type": "profile",
+    "analyst": "System",
+    "notes": "Auto-collected public profile via username enumeration",
+    "confidence": "MEDIUM",
+    "collected_at": "2026-01-04T06:20:21.023462+00:00",
+    "images": []
+  }
+]
