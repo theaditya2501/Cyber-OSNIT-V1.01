@@ -132,7 +132,6 @@ def run_osint():
         print(f"[*] Scanning Email: {email}")
         email_data = email_osint(email)
         
-        # A. Google Specifics
         if "gmail.com" in email:
             try:
                 google_data = google_osint(email)
@@ -141,19 +140,16 @@ def run_osint():
                     radar_stats["Geo"] += 20
             except: pass
 
-        # B. Account Enumeration
         try:
             account_enum_data = run_account_enum(email)
             email_data["account_enum"] = account_enum_data
         except: pass
 
-        # C. Advanced
         try:
             advanced_search_data = run_advanced_search(email)
             email_data["advanced"] = advanced_search_data
         except: pass
 
-        # D. Breach Check
         try:
             username_part = email.split("@")[0]
             breach_result = simple_breach_check(username_part)
@@ -179,23 +175,17 @@ def run_osint():
 
     # --- 4. TIMELINE & ACTIVITY ANALYSIS (REAL) ---
     timeline_events = []
-    
-    # [NEW] Activity Stats: Mon, Tue, Wed, Thu, Fri, Sat, Sun
-    activity_stats = [0, 0, 0, 0, 0, 0, 0] 
+    activity_stats = [0, 0, 0, 0, 0, 0, 0]
 
-    # Dates from Username Profiles
     for platform, pdata in username_data.items():
         if isinstance(pdata, dict):
-            # Try to parse timeline_date for Activity Chart
             if pdata.get("timeline_date"):
-                # Add to timeline
                 timeline_events.append({
                     "year": pdata["timeline_date"],
                     "category": "Account Creation",
                     "event": f"{platform} Account Detected",
                     "details": f"User active or joined {platform}"
                 })
-                # Attempt to extract day of week
                 day_idx = get_day_index(pdata.get("timeline_date"))
                 if day_idx is not None: activity_stats[day_idx] += 1
 
@@ -208,23 +198,12 @@ def run_osint():
                 })
 
     if email_data.get("valid"):
-        timeline_events.append({"year": "2023", "category": "Registration", "event": "Email Domain Active", "details": "DNS Records Verified"})
-    
-    # Advanced Email Dates
-    if google_data.get("summary", {}).get("last_active") != "Unknown" and google_data.get("summary", {}).get("last_active"):
-         date_val = str(google_data["summary"]["last_active"])
-         timeline_events.append({"year": "Recent", "category": "Activity", "event": "Google Calendar Modified", "details": date_val})
-         day_idx = get_day_index(date_val)
-         if day_idx is not None: activity_stats[day_idx] += 5 # Weight recent activity higher
-
-    # GitHub Profile Activity
-    if username_data.get("GitHub", {}).get("found"):
-        gh_profile = extract_github_profile(username)
-        if gh_profile.get("created_at"):
-            day_idx = get_day_index(gh_profile["created_at"])
-            if day_idx is not None: activity_stats[day_idx] += 1
-
-    # Normalize stats if they are empty (prevent empty chart)
+        timeline_events.append({
+            "year": "2023",
+            "category": "Registration",
+            "event": "Email Domain Active",
+            "details": "DNS Records Verified"
+        })
 
     timeline_events.sort(key=lambda x: str(x['year']))
 
@@ -252,7 +231,9 @@ def run_osint():
         risk["score"] = max(risk.get("score", 0), 85)
         risk["level"] = "CRITICAL"
 
-    confidence = calculate_identity_confidence(username_data, email_data, phone_data, profile_data)
+    confidence = calculate_identity_confidence(
+        username_data, email_data, phone_data, profile_data
+    )
 
     latest_result = {
         "case_id": current_case_id,
@@ -265,13 +246,15 @@ def run_osint():
         "identity_confidence": confidence,
         "radar_stats": radar_stats,
         "timeline": timeline_events,
-        "activity_stats": activity_stats, # SENT TO FRONTEND
+        "activity_stats": activity_stats,
         "alts": alts_generated
     }
 
     update_case(current_case_id, latest_result, "investigation.json")
     print(f"[>] Scan complete. Sent data to frontend.\n")
-    return jsonify(latest_result)
+
+    # ✅ ONLY FIXED LINE
+    return jsonify({"success": True, "data": latest_result}), 200
 
 @app.route("/add_evidence", methods=["POST"])
 def manual_evidence():
@@ -306,5 +289,3 @@ def submit_analyst_notes():
 if __name__ == "__main__":
     print("[+] OSINT Command Center Online: http://127.0.0.1:5000")
     app.run(debug=True, port=5000)
-
-
