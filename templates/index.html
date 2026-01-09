@@ -704,120 +704,147 @@
         }
 
         function showResults(data) {
-            currentScanData = data;
+    currentScanData = data;
 
-            // Hide Terminal, Show Results
-            document.getElementById('terminalSection').classList.add('hidden');
-            const resSection = document.getElementById('resultsSection');
-            resSection.classList.remove('hidden');
-            
-            // Trigger Animation
-            resSection.classList.remove('animate-enter');
-            void resSection.offsetWidth; // Trigger reflow
-            resSection.classList.add('animate-enter');
+    // Hide Terminal, Show Results
+    document.getElementById('terminalSection').classList.add('hidden');
+    const resSection = document.getElementById('resultsSection');
+    resSection.classList.remove('hidden');
 
-            // 1. PROFILE
-            const u = globalInputs.username || "Unknown";
-            document.getElementById('primaryAlias').innerText = u;
-            document.getElementById('detectedLoc').innerText = getVal(data, 'profiles.GitHub.location', 'Unknown');
+    // Animation
+    resSection.classList.remove('animate-enter');
+    void resSection.offsetWidth;
+    resSection.classList.add('animate-enter');
 
+    /* ===============================
+       PROFILE
+    =============================== */
+    const u = globalInputs.username || "Unknown";
+    document.getElementById('primaryAlias').innerText = u;
+    document.getElementById('detectedLoc').innerText =
+        getVal(data, 'profiles.GitHub.location', 'Unknown');
 
-            let cat = "General User";
-            if(getVal(data, 'username_results.GitHub.found', false)) cat = "Developer";
-            else if(getVal(data, 'username_results.Steam.found', false)) cat = "Gamer";
-            else if(getVal(data, 'username_results.LinkedIn.found', false)) cat = "Professional";
-            document.getElementById('usernameCategory').innerText = cat;
+    let cat = "General User";
+    if (getVal(data, 'username_results.GitHub.found', false)) cat = "Developer";
+    else if (getVal(data, 'username_results.Steam.found', false)) cat = "Gamer";
+    else if (getVal(data, 'username_results.LinkedIn.found', false)) cat = "Professional";
+    document.getElementById('usernameCategory').innerText = cat;
 
-            // Email Intel
-            const e = globalInputs.email;
-            if(getVal(data, 'email_results.valid', false)) {
-                document.getElementById('emailStatus').innerText = "Valid";
-                document.getElementById('emailStatus').className = "text-green-400";
-                document.getElementById('emailType').innerText = getVal(data, 'email_results.provider', 'Standard');
-                document.getElementById('emailBreach').innerText = "Safe (Mock)";
-                document.getElementById('emailDisposable').innerText = "No";
-                document.getElementById('emailGravatar').innerText = getVal(data, 'email_results.gravatar.exists', false) ? "Found" : "No";
-            } else {
-                document.getElementById('emailStatus').innerText = "Not Scanned";
-                document.getElementById('emailType').innerText = "N/A";
-                document.getElementById('emailDisposable').innerText = "-";
-            }
+    /* ===============================
+       EMAIL INTEL
+    =============================== */
+    if (getVal(data, 'email_results.valid', false)) {
+        document.getElementById('emailStatus').innerText = "Valid";
+        document.getElementById('emailStatus').className = "text-green-400";
+        document.getElementById('emailType').innerText =
+            getVal(data, 'email_results.provider', 'Standard');
+        document.getElementById('emailDisposable').innerText = "No";
+        document.getElementById('emailBreach').innerText = "Safe (Mock)";
+        document.getElementById('emailGravatar').innerText =
+            getVal(data, 'email_results.gravatar.exists', false) ? "Found" : "No";
+    } else {
+        document.getElementById('emailStatus').innerText = "Not Scanned";
+        document.getElementById('emailType').innerText = "N/A";
+        document.getElementById('emailDisposable').innerText = "-";
+    }
 
-            // Phone Intel (FIXED SECTION)
-            if(getVal(data, 'phone_results.valid', false)) {
-                const p = data.phone_results;
-                // Reading nested data from phone_osint.py structure
-                document.getElementById('phoneCarrier').innerText = getVal(p, 'basic.carrier', 'Unknown');
-                document.getElementById('phoneCountry').innerText = getVal(p, 'basic.country', 'International');
-                document.getElementById('phoneLine').innerText = getVal(p, 'basic.line_type', 'Mobile/Cellular');
-                
-                // TRUE NAME
-                const cnam = getVal(p, 'identity.cnam', 'Private');
-                const trueNameEl = document.getElementById('phoneTrueName');
-                if(cnam !== "Private" && cnam !== "Unknown") {
-                    trueNameEl.innerHTML = `${cnam} <i class="fa-solid fa-circle-check text-blue-400 ml-1"></i>`;
-                    trueNameEl.className = "text-white font-bold flex items-center gap-1";
-                } else {
-                    trueNameEl.innerText = "Private / Unlisted";
-                    trueNameEl.className = "text-gray-500 font-normal";
-                }
+    /* ===============================
+       PHONE INTEL (FIXED)
+    =============================== */
+    if (getVal(data, 'phone_results.valid', false)) {
+        const p = data.phone_results;
+        document.getElementById('phoneCarrier').innerText =
+            getVal(p, 'basic.carrier', 'Unknown');
+        document.getElementById('phoneCountry').innerText =
+            getVal(p, 'basic.country', 'International');
+        document.getElementById('phoneLine').innerText =
+            getVal(p, 'basic.line_type', 'Mobile');
 
-                // Social Links
-                const wa = getVal(p, 'dorks.WhatsApp API', '#');
-                document.getElementById('phoneSocial').innerHTML = `<a href="${wa}" target="_blank" class="text-cyber-cyan hover:underline">Check WhatsApp</a>`;
-                document.getElementById('phoneSpam').innerText = getVal(p, 'identity.spam_score', 'Low');
-            } else {
-                document.getElementById('phoneCarrier').innerText = "Not Scanned";
-                document.getElementById('phoneCountry').innerText = "N/A";
-                document.getElementById('phoneTrueName').innerText = "-";
-            }
-
-            // 2. KPI
-            const riskLevel = getVal(data, 'risk.level', 'LOW');
-            document.getElementById('riskLevelText').innerText = riskLevel;
-
-            const riskScore = Math.min(getVal(data, 'risk.risk_score', 0), 100);
-            document.getElementById('riskBar').style.width = `${riskScore}%`;
-
-            const conf = getVal(data, 'identity_confidence.confidence_score', 0);
-            document.getElementById('confidenceVal').innerText = `${conf}%`;
-            document.getElementById('confBar').style.width = `${conf}%`;
-
-            const uRes = data.username_results || {};
-            const found = Object.values(uRes).filter(x=>x.found);
-            document.getElementById('platformCountVal').innerText = found.length;
-
-            // 3. TABLE
-            const tbody = document.getElementById('evidenceBody');
-            tbody.innerHTML = "";
-            if (found.length === 0) {
-                document.getElementById('noEvidenceMsg').classList.remove('hidden');
-            } else {
-                document.getElementById('noEvidenceMsg').classList.add('hidden');
-                found.forEach(f => {
-                    const iconClass = f.category ? `fa-${f.category.toLowerCase()}` : 'fa-link';
-                    tbody.innerHTML += `
-                        <tr class="hover:bg-cyber-dark/50 transition duration-150 group border-b border-cyber-border/50">
-                            <td class="px-6 py-4 font-medium text-white flex items-center gap-2 whitespace-nowrap">
-                                <i class="fa-brands ${iconClass} text-gray-500 group-hover:text-cyber-cyan transition"></i> ${f.category || 'Unknown'}
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-gray-400">Profile</td>
-                            <td class="px-6 py-4 text-cyber-cyan truncate max-w-xs cursor-pointer hover:underline" onclick="window.open('${f.url}','_blank')">${f.url}</td>
-                            <td class="px-6 py-4 whitespace-nowrap"><span class="bg-green-900/30 text-green-400 px-2 py-1 rounded text-[10px] border border-green-800">HIGH</span></td>
-                            <td class="px-6 py-4 text-right whitespace-nowrap">
-                                <button class="text-gray-500 hover:text-white"><i class="fa-solid fa-up-right-from-square"></i></button>
-                            </td>
-                        </tr>`;
-                });
-            }
-
-            // 4. CHARTS/MAPS
-            initCharts(data, found.length);
-            initMap(data);
-            initNetwork(data);
-            initActivityChart(data.activity_stats); // PASS REAL STATS
-            populateTimeline(data.timeline);
+        const cnam = getVal(p, 'identity.cnam', 'Private');
+        const trueNameEl = document.getElementById('phoneTrueName');
+        if (cnam !== "Private" && cnam !== "Unknown") {
+            trueNameEl.innerHTML = `${cnam} <i class="fa-solid fa-circle-check text-blue-400 ml-1"></i>`;
+            trueNameEl.className = "text-white font-bold";
+        } else {
+            trueNameEl.innerText = "Private / Unlisted";
+            trueNameEl.className = "text-gray-500";
         }
+
+        document.getElementById('phoneSocial').innerHTML =
+            `<a href="${getVal(p, 'dorks.WhatsApp API', '#')}" target="_blank"
+             class="text-cyber-cyan hover:underline">Check WhatsApp</a>`;
+        document.getElementById('phoneSpam').innerText =
+            getVal(p, 'identity.spam_score', 'Low');
+    }
+
+    /* ===============================
+       KPI + DASHBOARD SYNC FIX
+       (THIS IS THE IMPORTANT PART)
+    =============================== */
+    const riskLevel = getVal(data, 'risk.level', 'LOW');
+    const riskScore = Math.min(getVal(data, 'risk.risk_score', 0), 100);
+    const confidence = getVal(data, 'identity_confidence.confidence_score', 0);
+    const platformsFound =
+        Object.values(data.username_results || {}).filter(x => x.found).length;
+
+    // NEW UI
+    document.getElementById('riskLevelText').innerText = riskLevel;
+    document.getElementById('confidenceVal').innerText = `${confidence}%`;
+    document.getElementById('platformCountVal').innerText = platformsFound;
+
+    document.getElementById('riskBar').style.width = `${riskScore}%`;
+    document.getElementById('confBar').style.width = `${confidence}%`;
+
+    // LEGACY UI (DO NOT REMOVE — JUST SYNC)
+    const legacyMap = {
+        riskBox: `${riskScore} (${riskLevel})`,
+        confidenceBox: `${confidence}%`,
+        platformCount: platformsFound
+    };
+
+    Object.keys(legacyMap).forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = legacyMap[id];
+    });
+
+    /* ===============================
+       EVIDENCE TABLE
+    =============================== */
+    const tbody = document.getElementById('evidenceBody');
+    tbody.innerHTML = "";
+
+    if (platformsFound === 0) {
+        document.getElementById('noEvidenceMsg').classList.remove('hidden');
+    } else {
+        document.getElementById('noEvidenceMsg').classList.add('hidden');
+
+        Object.values(data.username_results).forEach(p => {
+            if (!p.found) return;
+
+            tbody.innerHTML += `
+                <tr class="border-b border-cyber-border/50 hover:bg-cyber-dark/50">
+                    <td class="px-6 py-4 text-white">${p.category}</td>
+                    <td class="px-6 py-4">Profile</td>
+                    <td class="px-6 py-4 text-cyber-cyan cursor-pointer"
+                        onclick="window.open('${p.url}','_blank')">${p.url}</td>
+                    <td class="px-6 py-4"><span class="text-green-400">HIGH</span></td>
+                    <td class="px-6 py-4 text-right">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                    </td>
+                </tr>`;
+        });
+    }
+
+    /* ===============================
+       VISUALS
+    =============================== */
+    initCharts(data, platformsFound);
+    initMap(data);
+    initNetwork(data);
+    initActivityChart(data.activity_stats);
+    populateTimeline(data.timeline);
+}
+
 
         function initCharts(data, count) {
             if(radarChartInstance) radarChartInstance.destroy();
@@ -1092,4 +1119,5 @@
         }
     </script>
 </body>
+
 </html>
