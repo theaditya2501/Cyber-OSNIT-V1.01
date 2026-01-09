@@ -225,7 +225,7 @@ def check_username(username):
     results = {}
 
     # 1. MAIN SCAN
-    with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         futures = {executor.submit(check_single_platform, p, username): p["name"] for p in platforms}
         for future in concurrent.futures.as_completed(futures):
             res = future.result()
@@ -263,4 +263,5 @@ if __name__ == "__main__":
     data = check_username(target)
 
     print(json.dumps(data, indent=2, default=str))
+
 
