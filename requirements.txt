@@ -4,3 +4,4 @@ requests
 beautifulsoup4
 gender-guesser
 phonenumbers
+dnspython
