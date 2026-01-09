@@ -96,9 +96,31 @@ function startInvestigation() {
             </p>
         `;
 
-        /* ===== ✅ FIX: UPDATE RADAR GRAPH (THIS WAS MISSING) ===== */
+        /* =====================================================
+           🔧 FIX 1: UPDATE RADAR GRAPH (ADDED, NOTHING REMOVED)
+        ====================================================== */
         if (data.radar_stats) {
             updateRadarGraph(data.radar_stats);
         }
+
+        /* =====================================================
+           🔧 FIX 2: DASHBOARD TOP STATS SYNC (ADDED ONLY)
+        ====================================================== */
+
+        const identityMatchEl = document.getElementById("identityMatchValue");
+        if (identityMatchEl) {
+            identityMatchEl.innerText = data.identity_confidence.confidence_score + "%";
+        }
+
+        const footprintEl = document.getElementById("footprintCount");
+        if (footprintEl) {
+            footprintEl.innerText = platformFound;
+        }
+
+        const threatEl = document.getElementById("threatLevelValue");
+        if (threatEl) {
+            threatEl.innerText = data.risk.level;
+        }
+
     });
 }
