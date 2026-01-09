@@ -22,24 +22,34 @@ from helpers.case_manager import create_case, update_case, add_evidence, save_an
 # ===============================
 # IMPORT INTELLIGENCE MODULES
 # ===============================
+# ===== CORE MODULES (must load) =====
+from osint_modules.username_osint import check_username
+from osint_modules.phone_osint import phone_lookup
+from osint_modules.email_osint import email_osint
+from osint_modules.profile_extract import extract_github_profile
+from osint_modules.confidence_score import calculate_identity_confidence
+from osint_modules.correlate import correlate
+from osint_modules.risk_score import calculate_risk
+from osint_modules.google_osint import google_osint
+from osint_modules.account_enum import run_account_enum
+from osint_modules.advanced_search import run_advanced_search
+from osint_modules.breach_check import simple_breach_check
+
+print("[+] Core OSINT modules loaded")
+
+# ===== OPTIONAL LIBRARIES (may fail) =====
 try:
-    from osint_modules.username_osint import check_username
-    from osint_modules.phone_osint import phone_lookup
-    from osint_modules.email_osint import email_osint
-    from osint_modules.profile_extract import extract_github_profile
-    from osint_modules.confidence_score import calculate_identity_confidence
-    from osint_modules.correlate import correlate
-    from osint_modules.risk_score import calculate_risk
-    
-    # NEW MODULES
-    from osint_modules.google_osint import google_osint
-    from osint_modules.account_enum import run_account_enum
-    from osint_modules.advanced_search import run_advanced_search
-    from osint_modules.breach_check import simple_breach_check 
-    
-    print("[+] Modules loaded successfully.")
+    import gender_guesser.detector as gender
 except ImportError as e:
-    print(f"[!] IMPORT ERROR: {e}. Ensure libraries are installed.")
+    gender = None
+    print("[!] gender_guesser missing:", e)
+
+try:
+    import phonenumbers
+except ImportError as e:
+    phonenumbers = None
+    print("[!] phonenumbers missing:", e)
+
 
 app = Flask(__name__)
 
@@ -296,3 +306,4 @@ def submit_analyst_notes():
 if __name__ == "__main__":
     print("[+] OSINT Command Center Online: http://127.0.0.1:5000")
     app.run(debug=True, port=5000)
+
