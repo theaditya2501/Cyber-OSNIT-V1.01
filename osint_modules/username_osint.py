@@ -61,11 +61,10 @@ def get_all_variations(username):
 # ==========================================
 
 def predict_demographics(real_name):
-    """
-    1. Demographic Profiling: Guesses gender from First Name.
-    """
-    if not real_name: return "Unknown"
+    if not real_name or gender is None:
+        return "Unknown"
     d = gender.Detector()
+
     first_name = real_name.split()[0]
     guess = d.get_gender(first_name)
 
@@ -264,3 +263,4 @@ if __name__ == "__main__":
     data = check_username(target)
 
     print(json.dumps(data, indent=2, default=str))
+
