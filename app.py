@@ -281,7 +281,7 @@ def manual_evidence():
 
 @app.route("/get_result")
 def get_result():
-    return jsonify(latest_result)
+    return jsonify({"success": True, "data": latest_result}), 200
 
 @app.route("/get_evidence/<case_id>")
 def get_evidence_route(case_id):
@@ -306,4 +306,5 @@ def submit_analyst_notes():
 if __name__ == "__main__":
     print("[+] OSINT Command Center Online: http://127.0.0.1:5000")
     app.run(debug=True, port=5000)
+
 
